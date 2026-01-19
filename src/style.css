@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-fintech-primary text-fintech-text font-sans antialiased;
+  }
+}
+
+/* Custom Scrollbar for FinTech feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-fintech-primary;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-fintech-border rounded-full hover:bg-fintech-muted transition-colors;
+}
+
+.card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-fintech-accent/10 hover:-translate-y-1;
+}
