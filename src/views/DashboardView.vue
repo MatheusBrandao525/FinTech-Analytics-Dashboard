@@ -83,44 +83,46 @@ onMounted(() => {
             </div>
         </div>
 
-        <!-- KPI Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <KPICard 
+        <!-- Master Grid Layout (12 Columns) -->
+        <div class="grid grid-cols-12 gap-6 auto-rows-auto">
+            
+            <!-- SECTION: KPI Cards -->
+            <div 
                 v-for="(kpi, index) in kpiData" 
                 :key="index"
-                :title="kpi.title"
-                :value="kpi.value"
-                :change="kpi.change"
-                :isPositive="kpi.isPositive"
-                :icon="kpi.icon"
-            />
-        </div>
+                class="col-span-12 md:col-span-6 lg:col-span-3"
+            >
+                <KPICard 
+                    :title="kpi.title"
+                    :value="kpi.value"
+                    :change="kpi.change"
+                    :isPositive="kpi.isPositive"
+                    :icon="kpi.icon"
+                />
+            </div>
 
-        <!-- Charts Area -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-96">
+            <!-- SECTION: Charts -->
             <!-- Main Chart (Large) -->
-            <div class="lg:col-span-2 bg-fintech-card border border-fintech-border rounded-xl p-6 shadow-sm flex flex-col">
+            <div class="col-span-12 lg:col-span-8 bg-fintech-card border border-fintech-border rounded-xl p-6 shadow-sm flex flex-col h-[400px]">
                 <h3 class="text-lg font-semibold text-fintech-text mb-4">Market Trend</h3>
-                <div class="flex-1 min-h-0 relative">
+                <div class="flex-1 min-h-0 relative w-full">
                     <LineChart :data="lineChartData" />
                 </div>
             </div>
 
             <!-- Side Chart -->
-            <div class="bg-fintech-card border border-fintech-border rounded-xl p-6 shadow-sm flex flex-col">
+            <div class="col-span-12 lg:col-span-4 bg-fintech-card border border-fintech-border rounded-xl p-6 shadow-sm flex flex-col h-[400px]">
                  <h3 class="text-lg font-semibold text-fintech-text mb-4">Asset Allocation</h3>
-                 <div class="flex-1 min-h-0 relative flex items-center justify-center">
+                 <div class="flex-1 min-h-0 relative flex items-center justify-center w-full">
                     <DoughnutChart :data="doughnutChartData" />
                 </div>
             </div>
-        </div>
         
-        <!-- Bottom Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pb-6">
-             <div class="bg-fintech-card border border-fintech-border rounded-xl p-6 shadow-sm min-h-[300px]">
+            <!-- SECTION: Activity & Growth -->
+             <div class="col-span-12 lg:col-span-6 bg-fintech-card border border-fintech-border rounded-xl p-6 shadow-sm flex flex-col h-[400px]">
                  <h3 class="text-lg font-semibold text-fintech-text mb-4">Recent Activity</h3>
-                 <div class="space-y-4">
-                    <div v-for="i in 5" :key="i" class="flex items-center justify-between p-3 rounded-lg hover:bg-fintech-secondary transition-colors cursor-pointer border border-transparent hover:border-fintech-border">
+                 <div class="flex-1 overflow-y-auto custom-scrollbar space-y-4 pr-2">
+                    <div v-for="i in 8" :key="i" class="flex items-center justify-between p-3 rounded-lg hover:bg-fintech-secondary transition-colors cursor-pointer border border-transparent hover:border-fintech-border">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs" :class="i % 2 === 0 ? 'bg-fintech-success/20 text-fintech-success' : 'bg-fintech-accent/20 text-fintech-accent'">
                                 {{ i % 2 === 0 ? 'Buy' : 'Sell' }}
@@ -138,13 +140,14 @@ onMounted(() => {
                 </div>
             </div>
             
-             <div class="bg-fintech-card border border-fintech-border rounded-xl p-6 shadow-sm min-h-[300px]">
+             <div class="col-span-12 lg:col-span-6 bg-fintech-card border border-fintech-border rounded-xl p-6 shadow-sm flex flex-col h-[400px]">
                  <h3 class="text-lg font-semibold text-fintech-text mb-4">Portfolio Growth</h3>
-                  <div class="h-[250px] w-full">
+                  <div class="flex-1 min-h-0 relative w-full">
                     <AreaChart :data="areaChartData" />
                 </div>
             </div>
-        </div>
+
+        </div> <!-- End Master Grid -->
 
     </div>
   </MainLayout>
